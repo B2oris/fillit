@@ -6,11 +6,11 @@
 /*   By: beborch <beborch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 22:38:07 by beborch           #+#    #+#             */
-/*   Updated: 2018/02/22 04:41:18 by beborch          ###   ########.fr       */
+/*   Updated: 2018/03/17 22:14:21 by beborch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+//#include "fillit.h"
 
 
 int     error(void)
@@ -118,7 +118,7 @@ void    add_list(t_chaine **head, t_chaine **body, t_fill **fill)
         *body = (t_chaine*)malloc(sizeof(t_chaine));
         prev->next = *body;
     }
-    (*body)->str = ft_strdup((*fill)->tmp);
+    (*body)->str = ft_strdup((*fill)->cat_tmp);
     (*body)->next = NULL;
     (*body)->prev = prev;
 }
@@ -150,13 +150,13 @@ void    cat_list(t_fill *fill)
         {
             while (fill->buff[fill->i] == '\n')
                 fill->i++;
-            fill->tmp[fill->j] = fill->buff[fill->i];
+            fill->cat_tmp[fill->j] = fill->buff[fill->i];
             fill->j++;
             fill->i++;
             if ((fill->buff[fill->i] == '\n' && fill->buff[fill->i + 1] == '\n') || fill->buff[fill->i] == '\0')
                 break;
         } 
-        fill->tmp[fill->j] = '\0';
+        fill->cat_tmp[fill->j] = '\0';
         add_list(&fill->list, &body, &fill);
         fill->j = 0;
 
@@ -297,7 +297,7 @@ int     putter(t_fill *fill)
     fill->i = 0;
     fill->x = 0;
     fill->y = 0;
-    fill->letter = 'a';
+    fill->letter = 'A';
     fill->tmp[0] = -1;
     ft_putnbr(fill->len);
     while(fill->nbr[fill->i] != -1)
@@ -331,6 +331,8 @@ int     putter(t_fill *fill)
 
 int    solver(t_fill *fill)
 {
+    //
+    
     malloc_filling(fill);
     if (finder_check(fill) == -1)
         return (-1);
@@ -349,23 +351,51 @@ int    solver(t_fill *fill)
     return (0);
 }
 
+
+/*
+void    test(t_fill *fill)
+{
+    fill->i = 0;
+    while(fill->nbr[fill->i] != '-1')
+    {
+        while()
+    }
+}
+*/
+
+
+
 int     main(int argc, char *argv[])
 {
     t_fill  fill;
 
     if (argc != 2)
         return(error());
+    
+    //lecture du fichier
+    
     fill.file = open (argv[1], O_RDONLY);
     fill.ret = read(fill.file, fill.buff, BUFF_SIZE);
     fill.buff[fill.ret] = '\0';
+    
+    //listement des pieces
+
     ft_putchar('a');
     cat_list(&fill);
     ft_putchar('b');
+    
+    //nombre de piece
     fill.len = len_count(fill.list);
+    
     ft_putchar('c');
     ft_bn();
+
+    //solver
+
     if (solver(&fill) == -1)
         return (0);
+    
     ft_putstr("done\n");
+    //impression de la map finale
     print(&fill);
 }

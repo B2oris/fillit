@@ -1,8 +1,8 @@
 NAME := fillit
 
-SRC = fill.c bloc1.c
+SRC = test.c
 
-SRCS := $(addprefix ./srcs/, $(SRC))
+SRCS := $(SRC:%=./srcs/%)
 
 FLAGS := -Wall -Werror -Wextra
 
@@ -12,9 +12,9 @@ LIBS := -Llibft/ -lft
 
 all : $(NAME)
 
-$(NAME) :
+$(NAME) : 
 	make -C libft/
-	gcc $(FLAGS) $(INCLUDES) $(LIBS) $(SRCS) -o $(NAME)
+	gcc $(INCLUDES) $(LIBS) $(SRCS) -o $(NAME)
 
 clean :
 	rm -rf $(NAME)
@@ -24,5 +24,9 @@ fclean : clean
 	rm -rf $(SRC:.c=.o)
 
 re : fclean all
+
+ez :
+	rm -rf $(NAME)
+	gcc $(INCLUDES) $(LIBS) $(SRCS) -o $(NAME)
 
 .PHONY = $(NAME) all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: beborch <beborch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 20:01:47 by beborch           #+#    #+#             */
-/*   Updated: 2018/02/22 04:15:41 by beborch          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:56:28 by beborch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define FILLIT_H
 
 # define BUFF_SIZE 4096
+# define PIECES (19)
+# define MAX_PIECES (21)
+# define MAX_MAP_SIZE (20)
 
 #include "libft.h"
 #include <stdio.h>
@@ -29,78 +32,60 @@ typedef struct 	s_chaine
 	struct s_chaine *next;
 }				t_chaine;
 
+typedef struct 	s_size_t2
+{
+    size_t x;
+    size_t y;
+} 				t_size_t2;
+
+
 typedef struct 	s_fill
 {
 //multi fonction
-	t_chaine *list;
-	int i;
-	int j;
-//main	
-	int file;
-	int ret;
-	char buff[BUFF_SIZE];
-//cat_list
-//	int i;
-//	int j;
-	char tmp[20];
-//malloc_filling
-	char **map;
-	int len;
-//putter
-	int x;
-	int y;
-	char letter;
-	int k;
-	int tmp[20];
+	//t_chaine *list;
 
-//init_struct
-	char b[20][15];
-//fill_comp
-	int nbr[20];
+	
+	int i; // cat_list, parse
+	int j; // cat_list,	parse
+	int k; // parse
+	int l; // parse
+	int tmp; // check_parse
+	
+	char parsing[21][17];
 
-	int alloc_x;
-	int alloc_y;
+	char cat_tmp[20]; // cat_list
+
+	int file; //main
+	int ret;	//main
+	char buff[BUFF_SIZE];	//main
+
+	size_t num_piece; //
+
+	size_t map_size; //solver
+	size_t piece; //solver
+
+	char map[20][20];
 } 				t_fill;
 
+static const char *g_pieces[PIECES] = {
+    "#...#...#...#...",
+    "####............",
+    "#...#...##......",
+    ".#...#..##......",
+    "###.#...........",
+    "###...#.........",
+    "#...###.........",
+    "..#.###.........",
+    "##..#...#.......",
+    "##...#...#......",
+    "##..##..........",
+    "###..#..........",
+    ".#..###.........",
+    "#...##..#.......",
+    ".#..##...#......",
+    "#...##...#......",
+    ".#..##..#.......",
+    "##...##.........",
+    ".##.##.........."};
 
-
-int		ft_bloc0(t_fill *map);
-int		ft_bloc1(t_fill *map);
-int		ft_bloc2(t_fill *map);
-int		ft_bloc3(t_fill *map);
-int		ft_bloc4(t_fill *map);
-int		ft_bloc5(t_fill *map);
-int		ft_bloc6(t_fill *map);
-int		ft_bloc7(t_fill *map);
-int		ft_bloc8(t_fill *map);
-int		ft_bloc9(t_fill *map);
-int		ft_bloc10(t_fill *map);
-int		ft_bloc11(t_fill *map);
-int		ft_bloc12(t_fill *map);
-int		ft_bloc13(t_fill *map);
-int		ft_bloc14(t_fill *map);
-int		ft_bloc15(t_fill *map);
-int		ft_bloc16(t_fill *map);
-int		ft_bloc17(t_fill *map);
-int		ft_bloc18(t_fill *map);
-
-int		check_bloc0(t_fill *map);
-int		check_bloc1(t_fill *map);
-int		check_bloc2(t_fill *map);
-int		check_bloc3(t_fill *map);
-int		check_bloc4(t_fill *map);
-int		check_bloc5(t_fill *map);
-int		check_bloc6(t_fill *map);
-int		check_bloc7(t_fill *map);
-int		check_bloc8(t_fill *map);
-int		check_bloc9(t_fill *map);
-int		check_bloc10(t_fill *map);
-int		check_bloc11(t_fill *map);
-int		check_bloc12(t_fill *map);
-int		check_bloc13(t_fill *map);
-int		check_bloc14(t_fill *map);
-int		check_bloc15(t_fill *map);
-int		check_bloc16(t_fill *map);
-int		check_bloc17(t_fill *map);
-int		check_bloc18(t_fill *map);
 #endif
