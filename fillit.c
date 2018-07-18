@@ -6,7 +6,7 @@
 /*   By: beborch <beborch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 19:46:44 by beborch           #+#    #+#             */
-/*   Updated: 2018/07/12 20:57:00 by beborch          ###   ########.fr       */
+/*   Updated: 2018/07/18 15:56:08 by beborch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ int				not_again(t_fill *fill)
 
 void			before_parse(t_fill *fill)
 {
-	char tmp[2000];
-	int i;
-	int j;
-	 
+	char	tmp[2000];
+	int		i;
+	int		j;
+
 	i = 0;
 	j = 0;
-	
 	if (fill->buff[0] == '\n')
 	{
 		i++;
